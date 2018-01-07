@@ -40,7 +40,7 @@ mqttc.on_connect = on_connect
 mqttc.on_subscribe = on_subscribe
 
 # Connect
-mqttc.username_pw_set("YOUR UserNameinCloudMqtt" , "YOUR Password")
+mqttc.username_pw_set("oxefqvkn" , "aKpQPSFiTpXp")
 mqttc.connect(MQTT_Broker, int(MQTT_Port), int(Keep_Alive_Interval))
 
 # Continue the network loop
