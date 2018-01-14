@@ -1,11 +1,14 @@
 #------------------------------------------
-#--- Author: Pradeep Singh
-#--- Date: 20th January 2017
+#--- Date: 14 January 2018
 #--- Version: 1.0
 #--- Python Ver: 2.7
 #--- Details At: https://iotbytes.wordpress.com/store-mqtt-data-from-sensors-into-sql-database/
 #------------------------------------------
 
+# If this does not work  then edit the MQTT_Broker, MQTT_Port,
+# and the credentials in mqttc.username_pw_set("Name", "Password")
+
+# Use this code to simulate publishing some dummy temperature and Humidity to Cloudmqtt broker.
 
 import paho.mqtt.client as mqtt
 import random, threading, json
@@ -14,7 +17,7 @@ from datetime import datetime
 #====================================================
 # MQTT Settings 
 MQTT_Broker = "m12.cloudmqtt.com"
-#MQTT_Broker = "broker.mqttdashboard.com"
+####MQTT_Broker = "broker.mqttdashboard.com"
 MQTT_Port = 19757
 Keep_Alive_Interval = 45
 MQTT_Topic_Humidity = "PublishTopic/Humidity"
