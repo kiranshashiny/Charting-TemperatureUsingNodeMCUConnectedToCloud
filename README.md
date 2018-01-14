@@ -56,7 +56,7 @@ Upload the code to NodeMCU.
 Open the Serial Monitor and check that the connections are set and working and read the Temperature and Humidity of the room.
 
 
-<h1>Database setup. <h1>
+<h1>Database setup. </h1>
 
 Install a web server on your server or laptop.
 
@@ -170,7 +170,7 @@ servepage.py
 		)
 		
 
-Potential Problems and Troubleshooting tips:
+<h1>Potential Problems and Troubleshooting tips: </h1>
 
 Check that you have entered the right "ssid", "password", and "mqtt server" details for client.connect( ) from Cloudmqtt.com in Arduino IDE temperature.ino code.
 
@@ -187,7 +187,7 @@ Simulate publishing data to Cloudmqtt.com :
 
 
 
-References :
+<h1>References : </h1>
 
 https://iotbytes.wordpress.com/store-mqtt-data-from-sensors-into-sql-database/
 
