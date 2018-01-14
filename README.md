@@ -124,7 +124,18 @@ Run the init_db_tables.py, this will create an empty IoT.db file in the current 
 
 This creates a IoT.db database in the current folder.
 
-<h1> Simulate publishing data to cloud: </h1>
+<h1> There are two ways of publishing data, simulation or publishing real sensor data to the cloud </h1>
+
+<h2> Publishing real data to the Cloud </h2>
+
+After connecting the sensor to NodeMCU, and Uploading the TempSenso.ino, the data from the sensor should start
+publishing to the cloud.
+
+If the credentials, MQTT Port, user name, and the password is correct, the data will be seen in the Arduino IDE serial monitor
+as well on the WebSocket UI console of the Cloudmqtt.com
+
+
+<h2> Simulate publishing data to Cloud  </h2>
 
 	python  publish_dummy_data.py
 
@@ -134,8 +145,28 @@ Cloudmqtt.com websockets UI console.
 
 <h1> Subscribe to the topic and insert it into the database </h1>
 
+cd to the folder where the web server $HOME is located and run this code which will subscribe to the topic and start getting data.
+The data is then inserted to the database.
+
 	python mqtt_listen_sensor_data.py
 
+
+If everything is set, one would see messages like this in the terminal.
+
+		MQTT Data Received...
+		MQTT Topic: PublishTopic/Temperature
+		Data: {"Date":  "Sun, 14 Jan 2018 16:59:57 GMT", "Sensor_ID": "Dummy-2", "Temperature":   "26" }
+		About to Insert Temperature Data into Database.
+		Data: [ SensorID: Dummy-2, Temperature:26, Data_and_Time: 1515949198]
+		Inserted Temperature Data into Database.
+		
+		MQTT Data Received...
+		MQTT Topic: PublishTopic/Temperature
+		Data: {"Date":  "Sun, 14 Jan 2018 16:59:59 GMT", "Sensor_ID": "Dummy-2", "Temperature":   "26" }
+		About to Insert Temperature Data into Database.
+		Data: [ SensorID: Dummy-2, Temperature:26, Data_and_Time: 1515949200]
+		Inserted Temperature Data into Database.
+		
 
 <h1> Web Page set up to read data from JSON file and render. </h1>
 
@@ -168,6 +199,11 @@ servepage.py
 		    threaded=True,
 		    host='0.0.0.0'
 		)
+
+Another snapshot of readings from a real DHT-11 sensor connected to the NodeMCU
+
+
+![screen shot 2018-01-14 at 10 15 21 pm](https://user-images.githubusercontent.com/14288989/34918495-518868de-f979-11e7-9723-0332bf750a4e.png)
 		
 
 <h1>Potential Problems and Troubleshooting tips: </h1>
