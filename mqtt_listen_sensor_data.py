@@ -1,10 +1,20 @@
 #------------------------------------------
-#--- Author: Pradeep Singh
-#--- Date: 20th January 2017
+#
+#--- Date: 14th January 2017
 #--- Version: 1.0
 #--- Python Ver: 2.7
-#--- Details At: https://iotbytes.wordpress.com/store-mqtt-data-from-sensors-into-sql-database/
+#--- More Details At: https://iotbytes.wordpress.com/store-mqtt-data-from-sensors-into-sql-database/
 #------------------------------------------
+
+# Use this code to Subscribe to a certain topic from the mqtt broker Cloudmqtt.com
+# The topic I am interested is PublishTopic and Temperature.
+# The data should be first published from the device to the cloud - in order to receive by doing a subscribe here.
+# 1. Let the device send data to the Cloud Broker.
+# 2. Validate that the data is being received on the broker's WebsocketUI console.
+# 3. Run this code to receive the events from the Cloud mqtt broker.
+
+# If this does not work - check the MQTT_Broker, Port, and the credentials.
+# If there is no events received that may mean the broker has not received any data.
 
 import paho.mqtt.client as mqtt
 from store_Sensor_Data_to_DB import sensor_Data_Handler
@@ -14,7 +24,7 @@ from store_Sensor_Data_to_DB import sensor_Data_Handler
 MQTT_Broker = "m12.cloudmqtt.com"
 MQTT_Port = 19757
 Keep_Alive_Interval = 45
-MQTT_Topic = "IBMTopic/Temperature"
+MQTT_Topic = "PublishTopic/Temperature"
 
 #Subscribe to all Sensors at Base Topic
 def on_connect(mosq, obj,flags, rc):
