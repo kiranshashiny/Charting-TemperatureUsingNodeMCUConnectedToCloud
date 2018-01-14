@@ -1,9 +1,7 @@
 #------------------------------------------
-#--- Author: Pradeep Singh
-#--- Date: 20th January 2017
-#--- Version: 1.0
-#--- Python Ver: 2.7
-#--- Details At: https://iotbytes.wordpress.com/store-mqtt-data-from-sensors-into-sql-database/
+#--- 
+#--- Date: 14th January 2017
+#--- More Details At: https://iotbytes.wordpress.com/store-mqtt-data-from-sensors-into-sql-database/
 #------------------------------------------
 
 
@@ -82,7 +80,7 @@ def sensor_Data_Handler(Topic, jsonData):
         DHT22_Humidity_Data_Handler(jsonData)   
     elif Topic == "UpdatedTopic/Humidity":
         DHT22_Humidity_Data_Handler(jsonData)   
-    elif Topic == "IBMTopic/Temperature":
+    elif Topic == "PublishTopic/Temperature":
         DHT22_Temp_Data_Handler(jsonData)   
     
 

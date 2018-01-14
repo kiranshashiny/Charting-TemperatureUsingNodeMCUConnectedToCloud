@@ -1,13 +1,11 @@
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
 
-
-
-// Update these with values suitable for your network.
 #include <dht.h>
+
 dht DHT;
 
-// if you require to change the pin number, Edit the pin with your arduino pin.
+// If you need to change the pin number, Edit the pin with your arduino/NodeMCU pin.
 
 #define DHT11_PIN 16
 

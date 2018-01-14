@@ -18,6 +18,8 @@ Parts needed
         An Android Smartphone to subscribe to events from cloud
         An account with cloudmqtt.com MQTT Broker
 
+	Install Python, Flask, and a Web Server on your local server/laptop to render the graphics.
+
 A Typical NodeMCU and Pin diagram:
 
 <img width="511" alt="screen shot 2018-01-06 at 10 18 10 pm" src="https://user-images.githubusercontent.com/14288989/34641820-d391c96a-f32f-11e7-80c1-a1185c0fe3a4.png">
@@ -31,23 +33,111 @@ The Charting that was showing the temperature in the web portal.
 <img width="1435" alt="screen shot 2018-01-06 at 10 19 51 pm" src="https://user-images.githubusercontent.com/14288989/34641818-d312d8e4-f32f-11e7-96c2-76a22d25cd11.png">
 
 
-Setup :
+Setup your instance in CloudMQTT
+
+1. MQTT Broker : CloudMQTT.com
+
+Create a free instance in CloudMQTT and for now - pick CuteCat option as this is good for this demo.
+
+2. Temperature Sensor DHT11 to NodeMCU connections.	
+	
+Connect the Temperature Sensor's DHT11 signal pin to NodeMCU's Pin 16 (GPIO0), and Vcc and GND of the Temperature sensor to 3.3v and GND pins of the NodeMCU respectively.
+
+Load the code TemperatureSensor.ino to Arduino IDE.
+
+Update the ssid, password of the WiFI router in the code in your location.
+
+Insert the userid and the password of the CloudMQTT' user instance in these line in the code. 
+
+	client.connect("ESP8266Client", "UserId", "Password")) {
+
+Upload the code to NodeMCU.
+
+Open the Serial Monitor and check that the connections are set and working and read the Temperature and Humidity of the room.
 
 
-Connections
+<h1>Database setup. <h1>
+
+Install a web server on your server or laptop.
+
+Check that the home page works, before starting to port the code.
+
+cd to the folder of the webserver $HOME location 
+
+Install Python, Flask, paho-mqtt library
+
+	pip install flask
+
+	pip install paho-mqtt
+
+Download/git clone static.zip to the webserver $HOME location.
+
+Create a templates folder, and copy the graph.html to it.
+
+		<!DOCTYPE HTML>
+		<html>
+			<head>
+				<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+				<title>Highstock Example</title>
+		        <script src="{{ url_for('static', filename='jquery-1.8.3.min.js') }}"></script>
+				<script type="text/javascript">
+				$(function () {
+		    $.getJSON('http://0.0.0.0:5000/data.json', function (data) {
+		        // Create the chart
+		        $('#container').highcharts('StockChart', {
+		            rangeSelector : {
+		                selected : 1
+		            },
+		            title : {
+		                text : 'My Sensor'
+		            },
+		            series : [{
+		                name : 'Value',
+		                data : data,
+		                tooltip: {
+		                    valueDecimals: 2
+		                }
+		            }]
+		        });
+		    });
+		});
+				</script>
+			</head>
+			<body>
+		<script src="{{ url_for('static', filename='highstock.js') }}"></script>
+		<script src="{{ url_for('static', filename='highcharts-more.js') }}"></script>
+		<script src="{{ url_for('static', filename='exporting.js') }}"></script>
+		<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+		 
+			</body>
+		</html>
 
 
-Publish code in Arduino
+
+Unzip the static.zip and it will create a 'static' folder with required files in it.
+
+<h1> Initialize the database </h1>
+
+Run the init_db_tables.py, this will create an empty IoT.db file in the current folder.
+
+	python init_db_tables.py
+
+This creates a IoT.db database in the current folder.
+
+<h1> Simulate publishing data to cloud: </h1>
+
+	python  publish_dummy_data.py
+
+This should send some random Temperature and Humidity to the remote mqtt broker, You should be able to see it on the
+Cloudmqtt.com websockets UI console.
 
 
-Client code to subscribe in Python
+<h1> Subscribe to the topic and insert it into the database </h1>
+
+	python mqtt_listen_sensor_data.py
 
 
-
-Database setup.
-
-
-Web Page set up to read data from JSON file and render.
+<h1> Web Page set up to read data from JSON file and render. </h1>
 
 servepage.py
 
@@ -80,11 +170,25 @@ servepage.py
 		)
 		
 
+Potential Problems and Troubleshooting tips:
+
+Check that you have entered the right "ssid", "password", and "mqtt server" details for client.connect( ) from Cloudmqtt.com in Arduino IDE temperature.ino code.
+
+Restart the Cloudmqtt instance in case you are not seeing the data on the WebSocket UI console of Cloudmqtt.com
+
+Check that the Temperature and Humidity data is showing up on the Serial Monitor of the Arduino IDE.
+
+Open the WebSocket UI of cloudmqtt and see that you are getting the data from the NodeMCU.
+
+
+Simulate publishing data to Cloudmqtt.com :
+
+	python publish_dummy_data.py
+
+
 
 References :
 
 https://iotbytes.wordpress.com/store-mqtt-data-from-sensors-into-sql-database/
 
 https://www.fontenay-ronan.fr/dynamic-charts-with-highcharts-sqlite-and-python/
-
-:

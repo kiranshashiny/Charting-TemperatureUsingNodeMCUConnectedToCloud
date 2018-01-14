@@ -1,9 +1,9 @@
 #------------------------------------------
-#
-#--- Date: 14th January 2017
-#--- Version: 1.0
-#--- Python Ver: 2.7
-#--- More Details At: https://iotbytes.wordpress.com/store-mqtt-data-from-sensors-into-sql-database/
+#--- This code relies on store_Sensor_Data_to_DB.py. If you change the Topic - make appropriate changes 
+#--- in the store_Sensor_Data_to_DB.py code as well.
+#--- Date: 14th January 2018
+#--- This code was inherited from 
+#--- https://iotbytes.wordpress.com/store-mqtt-data-from-sensors-into-sql-database/
 #------------------------------------------
 
 # Use this code to Subscribe to a certain topic from the mqtt broker Cloudmqtt.com
