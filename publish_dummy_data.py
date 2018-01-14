@@ -13,11 +13,12 @@ from datetime import datetime
 
 #====================================================
 # MQTT Settings 
-MQTT_Broker = "broker.mqttdashboard.com"
-MQTT_Port = 1883
+MQTT_Broker = "m12.cloudmqtt.com"
+#MQTT_Broker = "broker.mqttdashboard.com"
+MQTT_Port = 19757
 Keep_Alive_Interval = 45
-MQTT_Topic_Humidity = "RuhiTopic/Humidity"
-MQTT_Topic_Temperature = "RuhiTopic/Temperature"
+MQTT_Topic_Humidity = "PublishTopic/Humidity"
+MQTT_Topic_Temperature = "PublishTopic/Temperature"
 
 #====================================================
 
@@ -36,6 +37,7 @@ def on_disconnect(client, userdata, rc):
         pass
         
 mqttc = mqtt.Client()
+mqttc.username_pw_set("oxefqvkn", "aKpQPSFiTpXp")
 mqttc.on_connect = on_connect
 mqttc.on_disconnect = on_disconnect
 mqttc.on_publish = on_publish
