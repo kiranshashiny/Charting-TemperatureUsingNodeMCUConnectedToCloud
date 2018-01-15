@@ -3,20 +3,23 @@ This blog is about how to publish and subscribe Temperature and Humidity to the 
 and how to subscribe to the data and insert into a SQL db.
 A simple python flask app is used to chart the data.
 
+It is assumed that the user is aware of MQTT protocols, working with NodeMCU microcontrollers, Database operations like Insert, retrieve,
+setting up of web server, some basic understanding of Python programming languages etc.
+
 
 Parts needed
 
         NodeMCU
-        DHT11
-        Router
-        Internet connection
+        DHT11 Temperature sensor.
+        A WiFi Router to which the microcontroller will connect to publish the temperature.
+        Internet connection so that it can talk to the MQTT broker.
         Some knowledge of C/C++, Python programming.
-        MQTT basic understanding.
+        Basic understanding of MQTT Protocols.
 
-        Arduino IDE installed to compile and Upload code to NodeMCU
-        NodeMCU Pin Diagram familiarity
-        An Android Smartphone to subscribe to events from cloud
-        An account with cloudmqtt.com MQTT Broker
+        Arduino IDE installed to compile and Upload code to NodeMCU.
+        NodeMCU Pin Diagram familiarity.
+        An Android Smartphone to subscribe and publish to events from cloud.
+        An account with cloudmqtt.com MQTT Broker.
 
 	Install Python, Flask, and a Web Server on your local server/laptop to render the graphics.
 
@@ -33,17 +36,27 @@ The Charting that was showing the temperature in the web portal.
 <img width="1435" alt="screen shot 2018-01-06 at 10 19 51 pm" src="https://user-images.githubusercontent.com/14288989/34641818-d312d8e4-f32f-11e7-96c2-76a22d25cd11.png">
 
 
-Setup your instance in CloudMQTT
+Setup your instance in MQTT broker portal called CloudMQTT
 
-1. MQTT Broker : CloudMQTT.com
+1. CloudMQTT.com
 
-Create a free instance in CloudMQTT and for now - pick CuteCat option as this is good for this demo.
+Create a free instance in CloudMQTT and for now - pick CuteCat option as this is sufficient for this demo.
+The temperature sensor connected to the NodeMCU will publish this data to the Cloud.
+This is a third party broker offering and easy to sign and use.
 
-2. Temperature Sensor DHT11 to NodeMCU connections.	
+
+2. Connections from Temperature Sensor DHT11 to NodeMCU.
 	
 Connect the Temperature Sensor's DHT11 signal pin to NodeMCU's Pin 16 (GPIO0), and Vcc and GND of the Temperature sensor to 3.3v and GND pins of the NodeMCU respectively.
 
-Load the code TemperatureSensor.ino to Arduino IDE.
+	Node MCU 	DHT11
+	=====================
+	16		Signal
+	Vcc 3.3v	Vcc
+	GND		GND
+	
+
+Load the code TempSensor.ino to Arduino IDE.
 
 Update the ssid, password of the WiFI router in the code in your location.
 
